@@ -26,7 +26,7 @@ Example
 -------
 This is a test of what the sentinel app.js will do:
 
-```sh
+```bash
 $ app.js superblock create blockheight=28224 payment=yLipDagwb1gM15RaUq3hpcaTxzDsFsSy9a=100
 Printing sentence to sentinel.. 
 Create superblock
