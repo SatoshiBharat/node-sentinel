@@ -2,6 +2,8 @@
 // initialize the python script
 // and catch its output
 
+
+
 if (process.argv.length >=3) {
 	var param = process.argv[2];
 	if (param == 'superblock') {
@@ -31,3 +33,40 @@ if (process.argv.length >=3) {
 } else {
 	console.log('You need some param');
 }
+
+/*var argv = require('yargs').argv;
+var valid_arg=['superblock', 'crontab', 'vote', 'proposal']
+
+if(process.argv[1] != foreach(valid_arg)) {
+	console.log('Parameter not valid')
+}
+
+function getparm() {
+	if(argv > 3 && argv < 5) {
+			console.log('Need more parameters')
+		//add more validations
+		}else {
+			var param=process.argv;
+			param.Foreach(${index})=>{
+				index.split('=');
+			}
+		}
+	}
+	return param
+}
+
+function superblock(getparm()) {
+
+}
+
+function vote(getparm()) {
+
+}
+
+function proposal(getparm()) {
+
+}
+
+function crontab(getparm()) {
+
+}*/
