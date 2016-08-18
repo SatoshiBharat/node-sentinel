@@ -5,7 +5,13 @@
 // use the yargs module
 // catch it's ouput and print it back
 
-var argv = require('yargs').argv;
+var argv = require('yargs')
+		   .usage('Usage $0 <command> [options]')
+		   .command('superblock', 'Generate a payment')
+		   .example('$0 superblock --create --event_block_height <block_height> --payment <address> --amount <quantity>)
+		   .command('vote', 'Generate a vote')
+		   .command('proposal', 'Createa  proposal on the DashCircle website')
+		   .argv;
 
 // parameters: superblock --create --event_block_height="2824" --payments="yLibDawb1gM15RaUq3hpcaTxzDFs5y9" amount=100
 
@@ -31,6 +37,7 @@ if(argv._ == 'superblock') {
 }
 
 function putChild(argv) {
+		var python_file ='mockuppython.py';
 		// require spawn
 		var spawn = require('child_process').spawn,
 
@@ -39,7 +46,7 @@ function putChild(argv) {
 		// gets off the first element of the object
 		primary = keys.shift(); 
 		var arg = "";
-		var args = ['mockuppython.py',argv[primary]];
+		var args = [python_file,argv[primary]];
 		for (var i = 0; i < keys.length; i++) {
 			if(argv[keys[i]] !== false){
 				arg = "--"+keys[i];
