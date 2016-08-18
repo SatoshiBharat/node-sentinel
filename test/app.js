@@ -1,72 +1,63 @@
-// node_glue.js 
-// initialize the python script
-// and catch its output
+// node_glue.js
+// Renamed to app.js
+// Initializae the python script mockuppython.py
+// added some parameters and values
+// use the yargs module
+// catch it's ouput and print it back
 
+var argv = require('yargs').argv;
 
+// parameters: superblock --create --event_block_height="2824" --payments="yLibDawb1gM15RaUq3hpcaTxzDFs5y9" amount=100
 
-if (process.argv.length >=3) {
-	var param = process.argv[2];
-	if (param == 'superblock') {
+if(argv._ == 'superblock') {
+	if(argv.create != null) {
+		putChild(argv);	
+	}
+} else if(argv._ == 'vote') {
+	//execute function of parameters
+	var attributes = ('(%d, %s, %s, %s %s)', argv.times, argv.type, argv.outcome, argv.hash, argv.name);
+		putChild(argv);	
+
+} else if(argv._ == 'crontab') {
+	//execute function of parameters
+	var attributes = ('(%d, %s, %s, %s %s)', argv.times, argv.type, argv.outcome, argv.hash, argv.name);
+		putChild(argv);	
+} else if(argv._ == 'proposal') {
+	//execute function of parameters
+	var attributes = ('(%s, %s, %s, %s, %s, %d)', argv.proposal_name, argv.description_url, argv.start_date, end_date, argv.payment_address, argv.payment_ammount); 
+		putChild(argv);	
+} else {
+	console.log('Your action parameter "'+argv._+'" is invalid or still not documented');
+}
+
+function putChild(argv) {
+		// require spawn
 		var spawn = require('child_process').spawn,
-		//
-		// Input should be: python moackuppython.py --create ....
-		//
-		py = spawn('python', ['mockuppython.py', 'superblock', '--create', '--event_block_height', '--payment']),
-		dataString = '';
+
+		// array with all the properties of the object
+		keys = Object.keys(argv); 
+		// gets off the first element of the object
+		primary = keys.shift(); 
+		var arg = "";
+		var args = ['mockuppython.py',argv[primary]];
+		for (var i = 0; i < keys.length; i++) {
+			if(argv[keys[i]] !== false){
+				arg = "--"+keys[i];
+				if(argv[keys[i]] !== true){
+					arg += "=\""+argv[keys[i]]+"\"";
+					args.push(arg);
+				}
+			}
+		}
+		
+		py = spawn('python', args);
 
 		py.stdout.on('data', (data) => {
 			console.log(`${data}`);
 		});
 
-		/* Once the stream is done (on 'end') we want to log 
-		 * the received data to the console */
 		py.stdout.on('end', function() {
 			console.log(dataString);
 		});
-	} else if (param == 'vote') {
-		console.log(param+' still not implemented');
-	} else if (param == 'crontab') {
-		console.log(param+' still not implemented');
-	} else if (param == 'proposal') {
-		console.log(param+' still not implemented');
-	};
-} else {
-	console.log('You need some param');
-}
-
-/*var argv = require('yargs').argv;
-var valid_arg=['superblock', 'crontab', 'vote', 'proposal']
-
-if(process.argv[1] != foreach(valid_arg)) {
-	console.log('Parameter not valid')
-}
-
-function getparm() {
-	if(argv > 3 && argv < 5) {
-			console.log('Need more parameters')
-		//add more validations
-		}else {
-			var param=process.argv;
-			param.Foreach(${index})=>{
-				index.split('=');
-			}
-		}
-	}
-	return param
-}
-
-function superblock(getparm()) {
 
 }
-
-function vote(getparm()) {
-
-}
-
-function proposal(getparm()) {
-
-}
-
-function crontab(getparm()) {
-
-}*/
