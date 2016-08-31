@@ -7,10 +7,13 @@
 
 var argv = require('yargs')
 		   .usage('Usage $0 <command> [options]')
-		   .command('superblock', 'Generate a payment')
-		   .example('$0 superblock --create --event_block_height <block_height> --payment <address> --amount <quantity>)
+		   .command('superblock', 'Create a payment to a superblock')
+		   .example('$0 superblock --create --event_block_height <block_height> --payment <address> --amount <quantity>\n')
 		   .command('vote', 'Generate a vote')
+		   .example('$0 vote --times 22 --type funding --outcome yes\n')
 		   .command('proposal', 'Createa  proposal on the DashCircle website')
+		   .example('--create --proposal_name sb-test --description_url www.dashwhale.org/p/sb-test --start_date 2016/8/1 --end_date 2017/1/1 \n--payment_address ydE7B1A7htNwSTvvER6xBdgpKZqNDbbEhP --payment_amount 23\n')
+		   .help()
 		   .argv;
 
 // parameters: superblock --create --event_block_height="2824" --payments="yLibDawb1gM15RaUq3hpcaTxzDFs5y9" amount=100
@@ -32,6 +35,8 @@ if(argv._ == 'superblock') {
 	//execute function of parameters
 	var attributes = ('(%s, %s, %s, %s, %s, %d)', argv.proposal_name, argv.description_url, argv.start_date, end_date, argv.payment_address, argv.payment_ammount); 
 		putChild(argv);	
+} else if(argv.h != null) {
+	console.log('This is a script to be able to work with sentinel cli,\nit should be added with the right parameters and values. \nPlease reffer to the documentation at the dash.org project.\n'+argv.usage+'\n'+argv.example);
 } else {
 	console.log('Your action parameter "'+argv._+'" is invalid or still not documented');
 }
