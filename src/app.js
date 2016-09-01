@@ -67,6 +67,9 @@ if(argv._ == 'superblock') {
 	//execute function of parameters
 	var attributes = ('(%s, %s, %s, %s, %s, %d)', argv.proposal_name, argv.description_url, argv.start_date, end_date, argv.payment_address, argv.payment_ammount); 
 		putChild(argv);	
+} else if(argv._ == 'json') {
+	// load json file 
+	getFile(argv.json);
 } else if(argv.h != null) {
 	console.log('This is a script to be able to work with sentinel cli,\nit should be added with the right parameters and values. \nPlease reffer to the documentation at the dash.org project.\n'+argv.usage+'\n'+argv.example);
 } else {
@@ -104,4 +107,20 @@ function putChild(argv) {
 			console.log(dataString);
 		});
 
+}
+
+// Load fs module to get file access
+
+var fs = require('fs');
+
+function getFile(json_file) {
+	// get json_file which would be a file embedding
+	// the objects with the parameters
+	fs.readFile( __dirname + json_file, function (err, data) {
+		if (err) {
+			throw err;
+		}
+		//get the file
+		console.log(data.toString());
+		});
 }
