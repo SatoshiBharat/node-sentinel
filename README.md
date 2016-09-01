@@ -27,7 +27,7 @@ Example
 This is a test of what the sentinel app.js will do:
 
 ```bash
-$ app.js superblock create blockheight=28224 payment=yLipDagwb1gM15RaUq3hpcaTxzDsFsSy9a=100
+$ app.js superblock create --block_height 28224 --payment yLipDagwb1gM15RaUq3hpcaTxzDsFsSy9 --amount 100
 Printing sentence to sentinel.. 
 Create superblock
 on event blockheight 28224 
@@ -38,7 +38,7 @@ Success!
 
 License
 -------
-The code is released under the [Apache Foundation License version 2](http://www.apache.org/licenses/LICENSE-2.0)
+The code is released under the MIT License
 
 
 Author
