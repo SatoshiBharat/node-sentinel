@@ -43,4 +43,4 @@ The code is released under the MIT License
 
 Author
 =====
-Alexandro - jza@apache.org
+JZA - jza@bitcuners.org
