@@ -53,31 +53,34 @@ var argv = require('yargs')
 console.log('Printing sentence to sentinel..\n');
 
 // TODO create a switch case
-if(argv._ == 'superblock') {
-	if(argv.create != null) {
+switch (argv._) {
+  case 'superblock':
+	/*if(argv.create != null) {
 		var action='Create superblock\n';
 		putChild(argv);	
-	}
-} else if(argv._ == 'vote') {
+	}*/
+  case 'vote':
 	//execute function of parameters
-	var action=('Issuing Vote\n';
+	var action='Issuing Vote\n';
 	var attributes = ('(%d, %s, %s, %s %s)', argv.times, argv.type, argv.outcome, argv.hash, argv.name);
 		putChild(argv);	
 
-} else if(argv._ == 'crontab') {
+  case 'crontab':
 	var action = 'Registering crontab\n';
 	//execute function of parameters
 	var attributes = ('(%d, %s, %s, %s %s)', argv.times, argv.type, argv.outcome, argv.hash, argv.name);
 		putChild(argv);	
-} else if(argv._ == 'proposal') {
+  case 'proposal':
 	var action = 'Generating proposal\n';
 	//execute function of parameters
 	var attributes = ('(%s, %s, %s, %s, %s, %d)', argv.proposal_name, argv.description_url, argv.start_date, end_date, argv.payment_address, argv.payment_ammount); 
 		putChild(argv);	
-} else if(argv._ == 'json') {
+  case 'json':
 	// load json file 
 	getFile(argv.json);
-} else if(argv.h != null) {
+} 
+
+if(argv.h != null) {
 	console.log('This is a script to be able to work with sentinel cli,\nit should be added with the right parameters and values. \nPlease reffer to the documentation at the dash.org project.\n'+argv.usage+'\n'+argv.example);
 } else {
 	console.log('Your action parameter "'+argv._+'" is invalid or still not documented');
@@ -86,9 +89,9 @@ if(argv._ == 'superblock') {
 function putChild(argv) {
 		var python_file ='mockuppython.py';
 		// require spawn
-		var spawn = require('child_process').spawn,
+		var spawn = require('child_process').spawn;
 
-		// Pritn statements
+		// Print statements
 		console.log($action);
 
 		// array with all the properties of the object
