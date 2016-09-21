@@ -50,20 +50,27 @@ var argv = require('yargs')
 
 // parameters: superblock --create --event_block_height="2824" --payments="yLibDawb1gM15RaUq3hpcaTxzDFs5y9" amount=100
 
+console.log('Printing sentence to sentinel..\n');
+
+// TODO create a switch case
 if(argv._ == 'superblock') {
 	if(argv.create != null) {
+		var action='Create superblock\n';
 		putChild(argv);	
 	}
 } else if(argv._ == 'vote') {
 	//execute function of parameters
+	var action=('Issuing Vote\n';
 	var attributes = ('(%d, %s, %s, %s %s)', argv.times, argv.type, argv.outcome, argv.hash, argv.name);
 		putChild(argv);	
 
 } else if(argv._ == 'crontab') {
+	var action = 'Registering crontab\n';
 	//execute function of parameters
 	var attributes = ('(%d, %s, %s, %s %s)', argv.times, argv.type, argv.outcome, argv.hash, argv.name);
 		putChild(argv);	
 } else if(argv._ == 'proposal') {
+	var action = 'Generating proposal\n';
 	//execute function of parameters
 	var attributes = ('(%s, %s, %s, %s, %s, %d)', argv.proposal_name, argv.description_url, argv.start_date, end_date, argv.payment_address, argv.payment_ammount); 
 		putChild(argv);	
@@ -81,13 +88,18 @@ function putChild(argv) {
 		// require spawn
 		var spawn = require('child_process').spawn,
 
+		// Pritn statements
+		console.log($action);
+
 		// array with all the properties of the object
 		keys = Object.keys(argv); 
 		// gets off the first element of the object
 		primary = keys.shift(); 
 		var arg = "";
 		var args = [python_file,argv[primary]];
+		// Loop for iterating throught the arguments
 		for (var i = 0; i < keys.length; i++) {
+			// filter on dashes per argument
 			if(argv[keys[i]] !== false){
 				arg = "--"+keys[i];
 				if(argv[keys[i]] !== true){
