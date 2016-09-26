@@ -52,7 +52,6 @@ var argv = require('yargs')
 
 console.log('Printing sentence to sentinel..\n');
 
-// TODO create a switch case
 switch (argv._) {
   case 'superblock':
 	/*if(argv.create != null) {

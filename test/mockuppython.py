@@ -13,7 +13,7 @@ def main():
     arg5 = 'superblock'
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'pdb', [arg5, arg1, arg2, arg3, arg4])
+        opts, args = getopt.getopt(sys.argv[1:], 'pdb', [arg1, arg2, arg3, arg4])
     except getopt.GetoptError as err:
         print(str(err))
         sys.exit(2)
